@@ -1,0 +1,31 @@
+# github-rest-api
+
+This project shows how to test github rest api. For now it supports for `repository` create/delete/read operations and list self user informations.
+
+To consume this REST client, Here I listed few samples only
+```
+import org.jkandasa.restclient.core.RestClient;
+import org.jkandasa.restclient.github.model.User;
+import org.jkandasa.restclient.github.model.Repository;
+
+RestClient client = RestClient.builder().uri(gitHubUri).basicAuthentication(gitHubUsername, gitHubPassword).build();
+
+// To list self(user) details
+User user = client.gitHub().user().selfInfo();
+
+//To list available repositories
+List<Repository> repoList = client.gitHub().repository().listSelfRepo();
+
+//To create new repository
+Repository repo = Repository.builder().name("my_first_repo_from_api").build();
+client.gitHub().repository().createUserRepository(repo);
+```
+#### To run the test
+This is maven project, hence we can use `mvn` command to run test.
+```
+mvn clean test
+```
+
+HTML report will be available on `github-rest-api/target/surefire-reports`
+Detailed log file will be available on `github-rest-api/target/github-rest-api.log`
+To change loggin level >> `github-rest-api/src/main/resources/logback.xml`
