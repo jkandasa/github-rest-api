@@ -19,6 +19,9 @@ List<Repository> repoList = client.gitHub().repository().listSelfRepo();
 //To create new repository
 Repository repo = Repository.builder().name("my_first_repo_from_api").build();
 client.gitHub().repository().createUserRepository(repo);
+
+//To delete repository
+client.gitHub().repository().delete("gitHubUsername", "my_first_repo_from_api")
 ```
 #### To run the test
 This is maven project, hence we can use `mvn` command to run test.
