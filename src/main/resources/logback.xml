@@ -1,0 +1,35 @@
+<configuration scan="true" scanPeriod="2 minutes">
+
+  <appender name="FILE"
+    class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>target/github-rest-api.log</file>
+    <encoder>
+      <pattern>%date %level [%thread] [%logger:%line] %msg%n</pattern>
+    </encoder>
+    <rollingPolicy
+      class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+      <FileNamePattern>../target/github-rest-api_%i.log.zip</FileNamePattern>
+      <MinIndex>1</MinIndex>
+      <MaxIndex>5</MaxIndex>
+    </rollingPolicy>
+    <triggeringPolicy
+      class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+      <MaxFileSize>5MB</MaxFileSize>
+    </triggeringPolicy>
+  </appender>
+
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%date %level [%thread] [%logger:%line] %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <logger level="INFO" name="org.apache.http" />
+  <logger level="INFO" name="org.jboss.resteasy" />
+
+  <logger level="DEBUG" name="org.jkandasa.restclient" />
+
+  <root level="DEBUG">
+    <appender-ref ref="FILE" />
+  </root>
+</configuration>
